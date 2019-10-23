@@ -1,0 +1,18 @@
+python manage.py makemigrations quickstart
+python manage.py migrate
+python manage.py runserver
+python manage.py createsuperuser --email admin@example.com --username admin
+
+-- tareas
+  estudiar configuracion de permisos en la apiguide
+  estudiar oauth2 
+  estudiar login red social
+  
+  
+
+
+
+
+
+
+

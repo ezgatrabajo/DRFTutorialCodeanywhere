@@ -1,0 +1,26 @@
+-- Categorias CRUD
+curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/categorias/
+curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/categorias/ -d '{"name":"nombre categoria 2","description":"descripcion categoria 2"}' -H 'Authorization: Token c2e97d7bdd6a4d536468c6b5e3e3ad6b91396233'
+curl -X PUT -H "Content-Type: application/json" -d '{"name":"nombre categoria 2","description":"descripcion categoria 2"}'  http://127.0.0.1:8000/v1/categorias/1/
+curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/categorias/1/ -H 'Authorization: Token c2e97d7bdd6a4d536468c6b5e3e3ad6b91396233'
+curl -X DELETE -H "Content-Type: application/json" http://127.0.0.1:8000/v1/categorias/1/
+
+-- Marcas CRUD
+curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/marcas/
+curl -X POST -H "Content-Type: application/json" -d '{"name":"nombre marcas 1","description":"descripcion marcas 1"}'  http://127.0.0.1:8000/v1/marcas/
+curl -X PUT -H "Content-Type: application/json" -d '{"name":"nombre marcas 111","description":"descripcion categoria 111"}'  http://127.0.0.1:8000/v1/marcas/1/
+curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/marcas/1/
+curl -X DELETE -H "Content-Type: application/json" http://127.0.0.1:8000/v1/marcas/1/
+
+-- Example
+curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/example/
+curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/example/ -u admin -p zaxscdvf
+curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/example/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'
+
+-- Create User and Login
+curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/user/login/ -d '{"username":"ezequiel","password":"zaxscdvf"}'
+curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/user/login/ -d '{"username":"hector","password":"zaxscdvf"}'
+curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/user/create/ -d '{"username":"hector", "password":"zaxscdvf", "email":"hector@gmail.com"}'
+curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/users/ -H 'Authorization: Token c2e97d7bdd6a4d536468c6b5e3e3ad6b91396233'
+
+

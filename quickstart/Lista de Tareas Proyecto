@@ -1,0 +1,20 @@
+crear todos los modelos
+crear todos los apiviews
+determinar vistas a permisos por roles cliente, vendedor, empresa, developer
+crear los admin necesarios
+crear logeo local con jwt para ingresar al admin web
+crear logeo por facebook para ingresar al admin web
+
+
+
+-- para el final y aprendiendo react native
+app android interfaz para negocio (usar reactjs)
+crear interfaz web para ver todos los pedidos nuevos, cambiar estado a preparado, acceso solo para empresa, vendedor, developer
+
+app android interfaz para clientes(react native)
+crear app native para generar pedido
+  solo pantalla nuevo pedido
+
+
+
+
