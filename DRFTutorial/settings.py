@@ -25,15 +25,18 @@ SECRET_KEY = '-8ujr!6h%zo_k=*d@g9v6lfm1%7rv3l)3igcth!fg+a1r(ox^p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 
-                 'localhost:3000',
-                 'https://codeanywhere.com/DRFTutorial',
-                 'drftutorial-ezgatrabajo837351.codeanyapp.com',
-                 'https://drftutorial-ezgatrabajo837351.codeanyapp.com',
-                 'port-8000.drftutorial-ezgatrabajo837351.codeanyapp.com',
-                 'port-3000.drftutorial-ezgatrabajo837351.codeanyapp.com',
-                 'https://DRFTutorial-ezgatrabajo837351.codeanyapp.com',
-                 'http://DRFTutorial-ezgatrabajo837351.codeanyapp.com']
+ALLOWED_HOSTS = ['192.168.0.6']
+                 #'localhost'
+                 #"'localhost:8000',
+                 #'localhost:3000',
+                 #'127.0.0.1',
+                 #'https://codeanywhere.com/DRFTutorial',
+                 #'drftutorial-ezgatrabajo837351.codeanyapp.com',
+                 #'https://drftutorial-ezgatrabajo837351.codeanyapp.com',
+                 #'port-8000.drftutorial-ezgatrabajo837351.codeanyapp.com',
+                 #'port-3000.drftutorial-ezgatrabajo837351.codeanyapp.com',
+                 #'https://DRFTutorial-ezgatrabajo837351.codeanyapp.com',
+                 #'http://DRFTutorial-ezgatrabajo837351.codeanyapp.com']
 
 
 # Application definition

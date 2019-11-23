@@ -23,6 +23,7 @@ router.register(r'users', apiviews.UserViewSet)
 router.register(r'groups', apiviews.GroupViewSet)
 router.register(r'categorias', apiviews.CategoriaViewSet)
 router.register(r'marcas', apiviews.MarcaViewSet)
+router.register(r'dispensers', apiviews.DispenserViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

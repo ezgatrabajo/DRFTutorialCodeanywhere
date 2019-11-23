@@ -15,10 +15,11 @@ curl -X DELETE -H "Content-Type: application/json" http://127.0.0.1:8000/v1/marc
 -- Example
 curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/example/
 curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/example/ -u admin -p zaxscdvf
-curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/example/ -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b'
+curl -X POST -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b' "Content-Type: application/json" http://127.0.0.1:8000/v1/example/
 
 -- Create User and Login
-curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/user/login/ -d '{"username":"ezequiel","password":"zaxscdvf"}'
+curl -X POST -H "Content-Type: application/json" -d '{"username":"ezequiel","password":"zaxscdvf"}' http://127.0.0.1:8000/v1/user/login/
+curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/user/login/ -d '{"username":"developer","password":"zaxscdvf"}'
 curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/user/login/ -d '{"username":"hector","password":"zaxscdvf"}'
 curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/user/create/ -d '{"username":"hector", "password":"zaxscdvf", "email":"hector@gmail.com"}'
 curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/users/ -H 'Authorization: Token c2e97d7bdd6a4d536468c6b5e3e3ad6b91396233'

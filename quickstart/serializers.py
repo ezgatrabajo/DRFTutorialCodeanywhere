@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group
-from .models import Categoria, Marca
+from .models import Categoria, Marca,Dispenser
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
@@ -36,4 +36,10 @@ class CategoriaSerializer(serializers.HyperlinkedModelSerializer):
 class MarcaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Marca
-        fields = '__all__'
+        fields = ['id', 'nombre', 'descripcion']
+
+
+class DispenserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Dispenser
+        fields = ['id', 'nombre', 'descripcion','serie', 'orden']
