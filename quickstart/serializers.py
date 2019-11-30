@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Group
-from .models import Categoria, Marca,Dispenser
+from .models import Categoria, Marca, Dispenser, Producto, Pedido, Pedidodetalle, Parametro, Promo, Estado
+
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
@@ -43,3 +44,42 @@ class DispenserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Dispenser
         fields = ['id', 'nombre', 'descripcion','serie', 'orden']
+
+
+
+class ProductoSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Producto
+        fields = '__all__'
+
+
+class PedidoSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Pedido
+        fields = '__all__'
+
+
+class PedidodetalleSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Pedidodetalle
+        fields = '__all__'
+
+
+class PromoSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Promo
+        fields = '__all__'
+
+class EstadoSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Estado
+        fields = '__all__'
+
+
+
+class ParametroSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Estado
+        fields = '__all__'
+
+

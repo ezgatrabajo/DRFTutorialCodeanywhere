@@ -1,8 +1,25 @@
-#from rest_framework import permissions
+from rest_framework import permissions
 
-#class BlacklistPermission(permissions.BasePermission):
+class Isdeveloper(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.user and request.user.groups.filter(name='Developer'):
+            return True
+        return False
 
-    #def has_permission(self, request, view):
-        #ip_addr = request.META['REMOTE_ADDR']
-        #blacklisted = Blacklist.objects.filter(ip_addr=ip_addr).exists()
-        #return not blacklisted
+class Iscliente(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.user and request.user.groups.filter(name='Cliente'):
+            return True
+        return False
+
+class Isempresa(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.user and request.user.groups.filter(name='Empresa'):
+            return True
+        return False
+
+class Isempleado(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.user and request.user.groups.filter(name='Empleado'):
+            return True
+        return False
