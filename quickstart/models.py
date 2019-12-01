@@ -21,6 +21,13 @@ class Categoria(models.Model):
         return self.nombre
 
 
+class Unidadmedida(models.Model):
+    nombre      = models.CharField(max_length=50,  blank=False, null=False)
+    descripcion = models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return self.nombre
+
 class Producto(models.Model):
     nombre         = models.CharField(max_length=50)
     descripcion    = models.CharField(max_length=200, blank=True, null=True)
@@ -32,8 +39,8 @@ class Producto(models.Model):
     imagen         = models.CharField(max_length=50, blank=True, null=False)
     enabled        = models.BooleanField(default=True, verbose_name='¿Producto En Venta?')
     ispromo        = models.BooleanField(default=False, verbose_name='¿En Promocion?')
-    preciopromo    = models.DecimalField(default=0, decimal_places=3, max_digits=10)
-    unidadmedida   = models.IntegerField(default=1, verbose_name='Unidad de Medida')
+    preciopromo    = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True, verbose_name='Precio Promo')
+    unidadmedida   = models.ForeignKey(Unidadmedida, on_delete=models.CASCADE, null=True, verbose_name='Unidad de Medida')
     isfraccionado  = models.BooleanField(default=False, verbose_name='¿Es Fraccionado?')
 
     def __str__(self):
@@ -46,6 +53,8 @@ class Estado(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
 
 
 class Pedido(models.Model):
@@ -87,10 +96,10 @@ class Pedidodetalle(models.Model):
 class Parametro(models.Model):
     nombre       = models.CharField(max_length=50)
     descripcion  = models.CharField(max_length=100)
-    valortexto   = models.CharField(max_length=100)
-    valorinteger = models.IntegerField()
-    valordecimal = models.DecimalField(default=0, decimal_places=3, max_digits=10)
-    valorfecha   = models.DateTimeField('Fecha')
+    valortexto   = models.CharField(max_length=100, blank=True, null=True)
+    valorinteger = models.IntegerField( default=0,blank=True, null=True)
+    valordecimal = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
+    valorfecha   = models.DateTimeField('Fecha',blank=True, null=True)
 
     def __str__(self):
         return self.nombre

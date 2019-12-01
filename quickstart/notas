@@ -12,7 +12,9 @@ python manage.py createsuperuser --email ezequiel@example.com --username ezequie
 
 192.168.0.6
 
-
+curl --request GET \
+  --url http://192.168.0.6:8000/v1/pedidos/1/ \
+  --header 'authorization: Token 5b5ff1dacccb9d3e9f1aeea34cc7914ae2e69491'
 
 
 
