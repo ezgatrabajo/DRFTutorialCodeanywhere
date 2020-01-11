@@ -105,6 +105,17 @@ class EstadoViewSet(viewsets.ModelViewSet):
         return super(EstadoViewSet, self).get_permissions()
 
 
+class UnidadmedidaViewSet(viewsets.ModelViewSet):
+    queryset = Unidadmedida.objects.all()
+    serializer_class = UnidadmedidaSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
+            self.permission_classes = [Isdeveloper | Isempresa]
+        return super(UnidadmedidaViewSet, self).get_permissions()
+
+
+
 class ParametroViewSet(viewsets.ModelViewSet):
     queryset = Parametro.objects.all()
     serializer_class = ParametroSerializer
