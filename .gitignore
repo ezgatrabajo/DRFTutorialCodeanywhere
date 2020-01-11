@@ -1,6 +1,6 @@
-env
-venv
-envReactNative
+env/*
+venv/*
+envReactNative/*
 db.sqlite3
 DRFTutorial/settings.py
 quickstart/migrations
