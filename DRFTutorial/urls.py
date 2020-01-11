@@ -24,7 +24,7 @@ router.register(r'groups', apiviews.GroupViewSet)
 router.register(r'categorias', apiviews.CategoriaViewSet)
 router.register(r'marcas', apiviews.MarcaViewSet)
 router.register(r'productos', apiviews.ProductoViewSet)
-
+router.register(r'unidadmedida', apiviews.UnidadmedidaViewSet)
 router.register(r'pedidos', apiviews.PedidoViewSet)
 router.register(r'pedidodetalles', apiviews.PedidodetalleViewSet)
 router.register(r'promos', apiviews.PromoViewSet)
