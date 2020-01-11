@@ -40,7 +40,7 @@ class Producto(models.Model):
     enabled        = models.BooleanField(default=True, verbose_name='¿Producto En Venta?')
     ispromo        = models.BooleanField(default=False, verbose_name='¿En Promocion?')
     preciopromo    = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True, verbose_name='Precio Promo')
-    unidadmedida   = models.ForeignKey(Unidadmedida, on_delete=models.CASCADE, null=True, verbose_name='Unidad de Medida')
+    unidadmedida   = models.ForeignKey(Unidadmedida, on_delete=models.CASCADE, null=True)
     isfraccionado  = models.BooleanField(default=False, verbose_name='¿Es Fraccionado?')
 
     def __str__(self):
