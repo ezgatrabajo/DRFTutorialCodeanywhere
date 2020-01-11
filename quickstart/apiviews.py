@@ -63,6 +63,17 @@ class MarcaViewSet(viewsets.ModelViewSet):
             self.permission_classes = [Isdeveloper|Isempresa]
         return super(MarcaViewSet, self).get_permissions()
 
+class ProductoViewSet(viewsets.ModelViewSet):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+
+    def get_permissions(self):
+        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
+            self.permission_classes = [Isdeveloper|Isempresa]
+        return super(ProductoViewSet, self).get_permissions()
+
+
+
 
 class PedidoViewSet(viewsets.ModelViewSet):
     queryset = Pedido.objects.all()
