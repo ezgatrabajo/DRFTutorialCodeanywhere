@@ -1,4 +1,6 @@
-     env
-     envReactNative
-     db.sqlite3
-     DRFTutorial/settings.py
+env
+venv
+envReactNative
+db.sqlite3
+DRFTutorial/settings.py
+quickstart/migrations
