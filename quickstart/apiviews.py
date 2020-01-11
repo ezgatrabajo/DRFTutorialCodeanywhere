@@ -51,7 +51,7 @@ class CategoriaViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
             self.permission_classes = [Isdeveloper | Isempresa]
-        return super(MarcaViewSet, self).get_permissions()
+        return super(CategoriaViewSet, self).get_permissions()
 
     
 class MarcaViewSet(viewsets.ModelViewSet):

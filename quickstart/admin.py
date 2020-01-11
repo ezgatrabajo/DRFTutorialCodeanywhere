@@ -3,10 +3,10 @@ from .models import Categoria, Marca, Producto, Dispenser, Pedido, Unidadmedida,
 
 
 class CategoriaAdmin(admin.ModelAdmin):
-    fields = ['name', 'description']
+    fields = ['nombre', 'descripcion']
 
 class MarcaAdmin(admin.ModelAdmin):
-    fields = ['name', 'description']
+    fields = ['nombre', 'descripcion']
 
 class UnidadmedidaAdmin(admin.ModelAdmin):
     fields = ['nombre', 'descripcion']
