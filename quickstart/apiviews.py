@@ -68,8 +68,8 @@ class ProductoViewSet(viewsets.ModelViewSet):
     serializer_class = ProductoSerializer
 
     def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper|Isempresa]
+        #if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
+        #    self.permission_classes = [Isdeveloper|Isempresa]
         return super(ProductoViewSet, self).get_permissions()
 
 
@@ -80,10 +80,10 @@ class PedidoViewSet(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
 
     def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper | Isempresa]
+    #    if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
+    #        self.permission_classes = [Isdeveloper | Isempresa]
+    #return super(PedidoViewSet, self).get_permissions()
         return super(PedidoViewSet, self).get_permissions()
-
 
 class PedidodetalleViewSet(viewsets.ModelViewSet):
     queryset = Pedidodetalle.objects.all()

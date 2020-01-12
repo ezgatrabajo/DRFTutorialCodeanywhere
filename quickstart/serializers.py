@@ -47,19 +47,28 @@ class DispenserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
+class UnidadmedidaSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Unidadmedida
+        fields = '__all__'
+
+
 class ProductoSerializer(serializers.HyperlinkedModelSerializer):
-    marca        = serializers.StringRelatedField(many=False)
-    categoria    = serializers.StringRelatedField(many=False)
-    unidadmedida = serializers.StringRelatedField(many=False)
+    marca        = MarcaSerializer(read_only=True)
+    marcaId      = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Marca.objects.all(), source='marca')
+    categoria    = CategoriaSerializer(read_only=True)
+    categoriaId  = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Categoria.objects.all(), source='categoria')
+    unidadmedida = UnidadmedidaSerializer(read_only=True)
+    unidadmedidaId = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Unidadmedida.objects.all(), source='unidadmedida')
 
     class Meta:
         model = Producto
-        fields = ['nombre', 'descripcion','preciounitario', 'marca','categoria' ,'codigoexterno', 'stock', 'imagen', 'enabled', 'ispromo', 'preciopromo','unidadmedida','isfraccionado']
+        fields = ['nombre', 'marcaId','descripcion','preciounitario', 'marca','categoria','categoriaId' ,'codigoexterno', 'stock', 'imagen', 'enabled', 'ispromo', 'preciopromo','unidadmedida','unidadmedidaId' ,'isfraccionado']
 
 
-class PedidoSerializer(serializers.HyperlinkedModelSerializer):
+class EstadoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Pedido
+        model = Estado
         fields = '__all__'
 
 
@@ -68,15 +77,26 @@ class PedidodetalleSerializer(serializers.HyperlinkedModelSerializer):
         model = Pedidodetalle
         fields = '__all__'
 
+class PedidoSerializer(serializers.HyperlinkedModelSerializer):
+    cliente = UserSerializer()
+    estado  = EstadoSerializer()
+    items   = PedidodetalleSerializer(many=True)
+
+    class Meta:
+        model = Pedido
+        fields = ['fecha','cliente','estado','items']
+        read_only_fields = ['cliente','estado']
+
+    def create(self, validated_data):
+        cliente_data = validated_data.pop('cliente')
+        pedido = Pedido.objects.create(**validated_data)
+        Pedido.objects.create(pedido=pedido, **cliente_data)
+        return pedido
+
 
 class PromoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Promo
-        fields = '__all__'
-
-class EstadoSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Estado
         fields = '__all__'
 
 
@@ -88,8 +108,4 @@ class ParametroSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-class UnidadmedidaSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Unidadmedida
-        fields = '__all__'
 
