@@ -94,6 +94,10 @@ class PedidodetalleSerializer(serializers.HyperlinkedModelSerializer):
 
 class PedidoSerializer(serializers.HyperlinkedModelSerializer):
     items     = PedidodetalleSerializer(many=True)
+    estado = EstadoSerializer(many=False, read_only=True)
+    estadoId = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Estado.objects.all(), source='estado')
+    cliente = UserSerializer(many=False, read_only=True)
+    clienteId = serializers.PrimaryKeyRelatedField(write_only=True, queryset=User.objects.all(), source='cliente')
 
     def create(self, validated_data):
         print(validated_data)
@@ -109,7 +113,7 @@ class PedidoSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Pedido
-        fields = ['android_id',
+        fields = ['android_id','estado','estadoId','cliente','clienteId',
                   'subtotal','monto',
                   'localidad','calle','nro','telefono','contacto','items'
                   ]

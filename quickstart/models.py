@@ -60,12 +60,12 @@ class Estado(models.Model):
 
 class Pedido(models.Model):
     fecha      = models.DateTimeField('Fecha Creacion', auto_now=True)
-    #estado     = models.ForeignKey(Estado, on_delete=models.CASCADE, default=1, blank=True, null=True)
+    estado     = models.ForeignKey(Estado, on_delete=models.CASCADE, default=1, blank=True, null=True)
     android_id = models.IntegerField(default=0)
     subtotal   = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
     monto      = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
     montoabona = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
-    #cliente    = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    cliente    = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     localidad  = models.CharField(max_length=50)
     calle      = models.CharField(max_length=50)
     piso       = models.CharField(max_length=10, blank=True, null=True)
