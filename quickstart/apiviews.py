@@ -11,6 +11,19 @@ from .serializers import *
 from .permissions import Iscliente, Isdeveloper, Isempleado, Isempresa
 
 
+
+
+class AlbumViewSet(viewsets.ModelViewSet):
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
+
+class TrackViewSet(viewsets.ModelViewSet):
+    queryset = Track.objects.all()
+    serializer_class = TrackSerializer
+
+
+
+
 #TABLAS DEL SISTEMA
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -90,8 +103,8 @@ class PedidodetalleViewSet(viewsets.ModelViewSet):
     serializer_class = PedidodetalleSerializer
 
     def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper | Isempresa]
+        #if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
+        #    self.permission_classes = [Isdeveloper | Isempresa]
         return super(PedidodetalleViewSet, self).get_permissions()
 
 

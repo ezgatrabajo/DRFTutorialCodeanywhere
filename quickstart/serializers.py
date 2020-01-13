@@ -1,8 +1,10 @@
 from django.contrib.auth.models import User, Group
-from .models import Categoria, Marca, Dispenser, Producto, Pedido, Pedidodetalle, Parametro, Promo, Estado, Unidadmedida
+from .models import Categoria, Marca, Dispenser, Producto, Pedido, Pedidodetalle, Parametro, Promo, Estado, Unidadmedida, Track, Album
 
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
+
+
 
 
 
@@ -72,26 +74,85 @@ class EstadoSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
+
+
+
+
+
+
 class PedidodetalleSerializer(serializers.HyperlinkedModelSerializer):
+    producto = ProductoSerializer(many=False, read_only=True)
+    productoId = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Producto.objects.all(), source='producto')
+
+
     class Meta:
         model = Pedidodetalle
-        fields = '__all__'
+        fields = ['cantidad', 'producto','productoId']
+
+
+
 
 class PedidoSerializer(serializers.HyperlinkedModelSerializer):
-    cliente = UserSerializer()
-    estado  = EstadoSerializer()
-    items   = PedidodetalleSerializer(many=True)
+    items     = PedidodetalleSerializer(many=True)
+
+    def create(self, validated_data):
+        print(validated_data)
+
+        tracks_data = validated_data.pop('items')
+        print(tracks_data)
+
+        pedido = Pedido.objects.create(**validated_data)
+        for track_data in tracks_data:
+            Pedidodetalle.objects.create(pedido=pedido, **track_data)
+        return pedido
+
 
     class Meta:
         model = Pedido
-        fields = ['fecha','cliente','estado','items']
-        read_only_fields = ['cliente','estado']
+        fields = ['android_id',
+                  'subtotal','monto',
+                  'localidad','calle','nro','telefono','contacto','items'
+                  ]
+
+
+
+
+
+
+
+
+
+
+
+#tutorial
+class TrackSerializer(serializers.ModelSerializer):
+    producto = ProductoSerializer(many=False, read_only=True)
+    productoId = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Producto.objects.all(), source='producto')
+
+    class Meta:
+        model = Track
+        fields = ['cantidad','producto','productoId']
+
+
+
+class AlbumSerializer(serializers.ModelSerializer):
+    tracks = TrackSerializer(many=True)
+
+    class Meta:
+        model = Album
+        fields = ['android_id', 'localidad', 'tracks']
 
     def create(self, validated_data):
-        cliente_data = validated_data.pop('cliente')
-        pedido = Pedido.objects.create(**validated_data)
-        Pedido.objects.create(pedido=pedido, **cliente_data)
-        return pedido
+        tracks_data = validated_data.pop('tracks')
+        album = Album.objects.create(**validated_data)
+
+        for track_data in tracks_data:
+            print(track_data)
+            Track.objects.create(album=album, **track_data)
+        return album
+
+
+
 
 
 class PromoSerializer(serializers.HyperlinkedModelSerializer):

@@ -1,6 +1,13 @@
 from django.contrib import admin
-from .models import Categoria, Marca, Producto, Dispenser, Pedido, Unidadmedida, Pedidodetalle, Parametro, Estado
+from .models import Categoria, Marca, Producto, Dispenser, Pedido, Unidadmedida, Pedidodetalle, Parametro, Estado, Track, Album
 
+
+class AlbumAdmin(admin.ModelAdmin):
+    fields = ['album_name', 'artist']
+
+
+class TrackAdmin(admin.ModelAdmin):
+    fields = ['producto','cantidad']
 
 class CategoriaAdmin(admin.ModelAdmin):
     fields = ['nombre', 'descripcion']
@@ -23,9 +30,6 @@ class PedidoAdmin(admin.ModelAdmin):
     #field = (('fecha', 'monto'),'cliente')
     readonly_fields = ['fecha']
     fieldsets = (
-        (None, {
-            'fields': ( 'cliente', 'enviodomicilio')
-        }),
         ('Totales', {
             'classes': ('collapse',),
             'fields': ('subtotal', 'monto', 'montodescuento', 'cantidaddescuento', 'montoabona'),
@@ -64,3 +68,6 @@ admin.site.register(Unidadmedida, UnidadmedidaAdmin)
 admin.site.register(Estado, EstadoAdmin)
 admin.site.register(Parametro, ParametroAdmin)
 admin.site.register(Dispenser, DispenserAdmin)
+admin.site.register(Track, TrackAdmin)
+
+admin.site.register(Album, AlbumAdmin)

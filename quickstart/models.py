@@ -4,29 +4,34 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
+
+
+
+
+
+
+
+
 # Create your models here.
 class Marca(models.Model):
     nombre      = models.CharField(max_length=50, blank=True)
     descripcion = models.CharField(max_length=200, blank=True, null=True)
 
-    def __str__(self):
-        return self.nombre
+
 
 
 class Categoria(models.Model):
     nombre      = models.CharField(max_length=50, blank=True)
     descripcion = models.CharField(max_length=200,blank=True, null=True)
 
-    def __str__(self):
-        return self.nombre
+
 
 
 class Unidadmedida(models.Model):
     nombre      = models.CharField(max_length=50,  blank=False, null=False)
     descripcion = models.CharField(max_length=200, blank=True, null=True)
 
-    def __str__(self):
-        return self.nombre
 
 class Producto(models.Model):
     nombre         = models.CharField(max_length=50)
@@ -43,54 +48,51 @@ class Producto(models.Model):
     unidadmedida   = models.ForeignKey(Unidadmedida, on_delete=models.CASCADE, null=True)
     isfraccionado  = models.BooleanField(default=False, verbose_name='¿Es Fraccionado?')
 
-    def __str__(self):
-        return self.nombre
 
 
 class Estado(models.Model):
     nombre      = models.CharField(max_length=50,  blank=False, null=False)
     descripcion = models.CharField(max_length=200, blank=True, null=True)
 
-    def __str__(self):
-        return self.nombre
 
 
 
 
 class Pedido(models.Model):
     fecha      = models.DateTimeField('Fecha Creacion', auto_now=True)
-    estado     = models.ForeignKey(Estado, on_delete=models.CASCADE, default=1, blank=True, null=True)
-    android_id = models.IntegerField(default=0, blank=True, null=True)
-    subtotal   = models.DecimalField(default=0, decimal_places=3, max_digits=10)
-    monto      = models.DecimalField(default=0, decimal_places=3, max_digits=10)
-    montoabona = models.DecimalField(default=0, decimal_places=3, max_digits=10)
-    cliente    = models.ForeignKey(User, on_delete=models.CASCADE)
-    localidad  = models.CharField(max_length=50, blank=True, null=True)
-    calle      = models.CharField(max_length=50, blank=True, null=True)
+    #estado     = models.ForeignKey(Estado, on_delete=models.CASCADE, default=1, blank=True, null=True)
+    android_id = models.IntegerField(default=0)
+    subtotal   = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
+    monto      = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
+    montoabona = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
+    #cliente    = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    localidad  = models.CharField(max_length=50)
+    calle      = models.CharField(max_length=50)
     piso       = models.CharField(max_length=10, blank=True, null=True)
-    nro        = models.CharField(max_length=10, blank=True, null=True)
-    telefono   = models.CharField(max_length=25, blank=True, null=True)
-    contacto   = models.CharField(max_length=50, blank=True, null=True)
-    montodescuento    = models.DecimalField(default=0, decimal_places=3, max_digits=10)
-    cantidaddescuento = models.DecimalField(default=0, decimal_places=3, max_digits=10)
+    nro        = models.CharField(max_length=10)
+    telefono   = models.CharField(max_length=25)
+    contacto   = models.CharField(max_length=50)
+    montodescuento    = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
+    cantidaddescuento = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
     enviodomicilio    = models.BooleanField(default=False, verbose_name='¿Envio a Domicilio?')
     visto             = models.BooleanField(default=False)
     impreso           = models.BooleanField(default=False)
-    tiempodemora      = models.CharField(max_length=10, default=False, verbose_name='Tiempo Demora')
-    horarecepcion     = models.TimeField(verbose_name='Hora Recepcion', default= 0, blank=True, null=True)
-    horaentrega       = models.TimeField(verbose_name='Hora Entrega', default=0)
+    tiempodemora      = models.CharField(max_length=10, default='00:45', verbose_name='Tiempo Demora',  blank=True, null=True)
 
-    def __str__(self):
-        return self.id
+
 
 
 class Pedidodetalle(models.Model):
     cantidad = models.DecimalField(default=0, decimal_places=3, max_digits=10)
-    pedido   = models.ForeignKey(Pedido, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    pedido   = models.ForeignKey(Pedido, on_delete=models.CASCADE,related_name='items')
+    producto = models.ForeignKey(Producto,  on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.id
+    class Meta:
+        unique_together = ['pedido']
+
+
+
+
 
 
 class Parametro(models.Model):
@@ -131,3 +133,38 @@ class Dispenser(models.Model):
 
     def __str__(self):
         return self.nombre
+
+
+
+#TUtorial
+class Album(models.Model):
+    album_name = models.CharField(max_length=100)
+    artist = models.CharField(max_length=100)
+    #datos pedido
+    fecha = models.DateTimeField('Fecha Creacion', auto_now=True)
+    android_id = models.IntegerField(default=0)
+    subtotal   = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
+    monto      = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
+    montoabona = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
+    localidad  = models.CharField(max_length=50)
+    calle      = models.CharField(max_length=50)
+    piso       = models.CharField(max_length=10, blank=True, null=True)
+    nro        = models.CharField(max_length=10)
+    telefono   = models.CharField(max_length=25)
+    contacto   = models.CharField(max_length=50)
+    montodescuento    = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
+    cantidaddescuento = models.DecimalField(default=0, decimal_places=3, max_digits=10, blank=True, null=True)
+    enviodomicilio    = models.BooleanField(default=False, verbose_name='¿Envio a Domicilio?')
+    visto             = models.BooleanField(default=False)
+    impreso           = models.BooleanField(default=False)
+    tiempodemora      = models.CharField(max_length=10, default='00:45', verbose_name='Tiempo Demora',  blank=True, null=True)
+
+
+
+class Track(models.Model):
+    album = models.ForeignKey(Album, related_name='tracks', on_delete=models.CASCADE)
+    cantidad = models.DecimalField(default=0, decimal_places=3, max_digits=10)
+    producto = models.ForeignKey(Producto,  on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ['album']
