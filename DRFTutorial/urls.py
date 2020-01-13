@@ -32,6 +32,8 @@ router.register(r'estados', apiviews.EstadoViewSet)
 router.register(r'parametros', apiviews.ParametroViewSet)
 
 router.register(r'dispensers', apiviews.DispenserViewSet)
+router.register(r'tracks', apiviews.TrackViewSet)
+router.register(r'albums', apiviews.AlbumViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
