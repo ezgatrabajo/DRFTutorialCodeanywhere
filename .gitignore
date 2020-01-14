@@ -4,3 +4,4 @@ envReactNative/*
 db.sqlite3
 DRFTutorial/settings.py
 quickstart/migrations
+envlinux/*
