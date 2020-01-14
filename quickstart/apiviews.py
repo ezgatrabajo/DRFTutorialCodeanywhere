@@ -41,6 +41,7 @@ class LoginView(APIView):
   permission_classes=()
   
   def post(self, request):
+    print("datos envidos:" + str(request.data))
     username = request.data.get("username")
     password = request.data.get("password")
     user = authenticate(username=username, password=password)
@@ -48,7 +49,7 @@ class LoginView(APIView):
     if user:
       return Response({"token":user.auth_token.key})
     else:
-      return Response ({"error":"Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
+      return Response ({"error":"Wrong Credentials"}, status=400)
   
 
 class GroupViewSet(viewsets.ModelViewSet):

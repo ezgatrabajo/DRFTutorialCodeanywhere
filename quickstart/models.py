@@ -87,9 +87,6 @@ class Pedidodetalle(models.Model):
     pedido   = models.ForeignKey(Pedido, on_delete=models.CASCADE,related_name='items')
     producto = models.ForeignKey(Producto,  on_delete=models.CASCADE)
 
-    class Meta:
-        unique_together = ['pedido']
-
 
 
 

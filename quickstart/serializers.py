@@ -65,7 +65,7 @@ class ProductoSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Producto
-        fields = ['nombre', 'marcaId','descripcion','preciounitario', 'marca','categoria','categoriaId' ,'codigoexterno', 'stock', 'imagen', 'enabled', 'ispromo', 'preciopromo','unidadmedida','unidadmedidaId' ,'isfraccionado']
+        fields = ['id', 'nombre', 'marcaId','descripcion','preciounitario', 'marca','categoria','categoriaId' ,'codigoexterno', 'stock', 'imagen', 'enabled', 'ispromo', 'preciopromo','unidadmedida','unidadmedidaId' ,'isfraccionado']
 
 
 class EstadoSerializer(serializers.HyperlinkedModelSerializer):
