@@ -87,7 +87,7 @@ class PedidodetalleSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Pedidodetalle
-        fields = ['cantidad', 'producto','productoId']
+        fields = ['id','cantidad', 'producto','productoId']
 
 
 
@@ -114,7 +114,7 @@ class PedidoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Pedido
         fields = ['android_id','estado','estadoId','cliente','clienteId',
-                  'subtotal','monto',
+                  'subtotal','monto','id','fecha',
                   'localidad','calle','nro','telefono','contacto','items'
                   ]
 
