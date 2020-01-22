@@ -113,7 +113,7 @@ class PedidoSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Pedido
-        fields = ['android_id','estado','estadoId','cliente','clienteId',
+        fields = ['id', 'android_id','estado','estadoId','cliente','clienteId',
                   'subtotal','monto','id','fecha',
                   'localidad','calle','nro','telefono','contacto','items'
                   ]

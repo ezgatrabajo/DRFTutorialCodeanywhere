@@ -2,10 +2,11 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.permissions import IsAuthenticated, SAFE_METHODS
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.decorators import action
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User, Group
-from .models import Categoria, Marca, Dispenser
+from .models import Categoria, Marca, Dispenser, Pedido, Pedidodetalle
 from rest_framework import viewsets, generics
 from .serializers import *
 from .permissions import Iscliente, Isdeveloper, Isempleado, Isempresa
@@ -82,8 +83,8 @@ class ProductoViewSet(viewsets.ModelViewSet):
     serializer_class = ProductoSerializer
 
     def get_permissions(self):
-        #if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-        #    self.permission_classes = [Isdeveloper|Isempresa]
+        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
+            self.permission_classes = [Isdeveloper|Isempresa]
         return super(ProductoViewSet, self).get_permissions()
 
 
@@ -94,18 +95,24 @@ class PedidoViewSet(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
 
     def get_permissions(self):
-    #    if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-    #        self.permission_classes = [Isdeveloper | Isempresa]
-    #return super(PedidoViewSet, self).get_permissions()
+        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
+           self.permission_classes = [Isdeveloper | Isempresa]
         return super(PedidoViewSet, self).get_permissions()
+
+    @action(detail=False)
+    def ultimopedido(self, request):
+        p = Pedido.objects.all().order_by('-id')[0]
+        s = self.get_serializer(p,many=False)
+        return Response(s.data)
+
 
 class PedidodetalleViewSet(viewsets.ModelViewSet):
     queryset = Pedidodetalle.objects.all()
     serializer_class = PedidodetalleSerializer
 
     def get_permissions(self):
-        #if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-        #    self.permission_classes = [Isdeveloper | Isempresa]
+        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
+            self.permission_classes = [Isdeveloper | Isempresa]
         return super(PedidodetalleViewSet, self).get_permissions()
 
 
