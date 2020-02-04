@@ -83,13 +83,11 @@ class EstadoSerializer(serializers.HyperlinkedModelSerializer):
 class PedidodetalleSerializer(serializers.HyperlinkedModelSerializer):
     producto    = ProductoSerializer(many=False, read_only=True)
     producto_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Producto.objects.all(), source='producto')
-    pedido      = PedidoSerializer(many=False, read_only=True)
     pedido_id   = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Pedido.objects.all(), source='pedido')
-
 
     class Meta:
         model = Pedidodetalle
-        fields = ['id','cantidad', 'producto','producto_id', 'pedido', 'pedido_id']
+        fields = ['id','cantidad', 'producto','producto_id', 'pedido_id']
 
 
 
