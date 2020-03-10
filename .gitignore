@@ -5,3 +5,5 @@ db.sqlite3
 DRFTutorial/settings.py
 quickstart/migrations
 envlinux/*
+**/envlinux/
+**/venv/
