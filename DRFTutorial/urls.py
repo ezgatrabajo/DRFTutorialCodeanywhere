@@ -45,10 +45,8 @@ urlpatterns = [
     path('v1/user/create/',apiviews.UserCreate.as_view(), name="user_create"),
     path('v1/user/login/',apiviews.LoginView.as_view(), name="user_login"),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    #path('admin/', admin.site.urls),  
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('home/', views.home),
-    #path('authsocial/', include('rest_framework_social_oauth2.urls')),
 ]
-#urlpatterns = format_suffix_patterns(urlpatterns)
+
