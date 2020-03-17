@@ -8,3 +8,6 @@ flush privileges;
 use ordermanager;
 show tables;
 
+
+create database ApiRestfulHibernate;
+create database ProyectoHibernate;

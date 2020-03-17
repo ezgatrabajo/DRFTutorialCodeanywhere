@@ -1,7 +1,9 @@
 -- Categorias CRUD
 curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/categorias/
 curl -X POST -H "Content-Type: application/json" http://127.0.0.1:8000/v1/categorias/ -d '{"name":"nombre categoria 2","description":"descripcion categoria 2"}' -H 'Authorization: Token c2e97d7bdd6a4d536468c6b5e3e3ad6b91396233'
-curl -X PUT -H "Content-Type: application/json" -d '{"name":"nombre categoria 2","description":"descripcion categoria 2"}'  http://127.0.0.1:8000/v1/categorias/1/
+curl -X PUT -H "Content-Type: application/json" -d '{"name":"nombre categoria 2","description":"descalls
+comandoslinux
+Lista de Tareas Proyectocripcion categoria 2"}'  http://127.0.0.1:8000/v1/categorias/1/
 curl -X GET -H "Content-Type: application/json" http://127.0.0.1:8000/v1/categorias/1/ -H 'Authorization: Token c2e97d7bdd6a4d536468c6b5e3e3ad6b91396233'
 curl -X DELETE -H "Content-Type: application/json" http://127.0.0.1:8000/v1/categorias/1/
 

@@ -25,18 +25,13 @@ SECRET_KEY = '-8ujr!6h%zo_k=*d@g9v6lfm1%7rv3l)3igcth!fg+a1r(ox^p'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.6','18.224.71.81', 'localhost']
-                 #'localhost'
-                 #"'localhost:8000',
-                 #'localhost:3000',
-                 #'127.0.0.1',
-                 #'https://codeanywhere.com/DRFTutorial',
-                 #'drftutorial-ezgatrabajo837351.codeanyapp.com',
-                 #'https://drftutorial-ezgatrabajo837351.codeanyapp.com',
-                 #'port-8000.drftutorial-ezgatrabajo837351.codeanyapp.com',
-                 #'port-3000.drftutorial-ezgatrabajo837351.codeanyapp.com',
-                 #'https://DRFTutorial-ezgatrabajo837351.codeanyapp.com',
-                 #'http://DRFTutorial-ezgatrabajo837351.codeanyapp.com']
+ALLOWED_HOSTS = ['192.168.0.8',
+                 '192.168.0.8:8000',
+                 'localhost',
+                 'ordermanager.com',
+                 'ordermanager.com/*',
+                 '127.0.0.1:8000',
+                 '127.0.0.1:8000']
 
 
 # Application definition
@@ -48,19 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'quickstart',
     'rest_framework',
     'rest_framework.authtoken',
-    
-    #'oauth2_provider',
-    #'social_django',
-    #'rest_framework_social_oauth2',
-   
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'apirestful'
 ]
 
 MIDDLEWARE = [
@@ -71,7 +61,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'social_django.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'DRFTutorial.urls'
@@ -87,8 +76,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'social_django.context_processors.backends',
-                #'social_django.context_processors.login_redirect',
                 'django.template.context_processors.request',
             ],
         },
@@ -98,15 +85,19 @@ TEMPLATES = [
 WSGI_APPLICATION = 'DRFTutorial.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'apirestfuldjango',
+        'USER': 'elementarystudio',
+        'PASSWORD': 'YXFzd2RlZnI=',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -115,14 +106,13 @@ REST_FRAMEWORK = {
 
     ],
     'DEFAULT_PERMISSION_CLASSES':[
-      'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.DjangoModelPermissions'
     ],
     'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100,
 }
 
 AUTHENTICATION_BACKENDS = {
-    #'rest_framework_social_oauth2.backends.DjangoOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 }
 
@@ -148,7 +138,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-ar'
 
 TIME_ZONE = 'UTC'
 

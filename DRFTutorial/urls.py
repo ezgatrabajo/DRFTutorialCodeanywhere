@@ -15,38 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework import routers
-from quickstart import apiviews, views
-from rest_framework.urlpatterns import format_suffix_patterns
 
-router = routers.DefaultRouter()
-router.register(r'users', apiviews.UserViewSet)
-router.register(r'groups', apiviews.GroupViewSet)
-router.register(r'categorias', apiviews.CategoriaViewSet)
-router.register(r'marcas', apiviews.MarcaViewSet)
-router.register(r'productos', apiviews.ProductoViewSet)
-router.register(r'unidadmedida', apiviews.UnidadmedidaViewSet)
-router.register(r'pedidos', apiviews.PedidoViewSet)
-router.register(r'pedidodetalles', apiviews.PedidodetalleViewSet)
-router.register(r'promos', apiviews.PromoViewSet)
-router.register(r'estados', apiviews.EstadoViewSet)
-router.register(r'parametros', apiviews.ParametroViewSet)
 
-router.register(r'dispensers', apiviews.DispenserViewSet)
-router.register(r'tracks', apiviews.TrackViewSet)
-router.register(r'albums', apiviews.AlbumViewSet)
-
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('v1/', include(router.urls)),
-    path('v1/example/',apiviews.ExampleView.as_view()),
-    path('v1/user/create/',apiviews.UserCreate.as_view(), name="user_create"),
-    path('v1/user/login/',apiviews.LoginView.as_view(), name="user_login"),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path('home/', views.home),
+    path('v1/', include('apirestful.urls')),
 ]
 

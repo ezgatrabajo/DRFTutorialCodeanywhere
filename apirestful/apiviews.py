@@ -5,11 +5,13 @@ from rest_framework.views import APIView
 from rest_framework.decorators import action
 
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User, Group
-from .models import Categoria, Marca, Dispenser, Pedido, Pedidodetalle
-from rest_framework import viewsets, generics
+from rest_framework import generics
+from rest_framework import viewsets
+from rest_framework import permissions
 from .serializers import *
-from .permissions import Iscliente, Isdeveloper, Isempleado, Isempresa
+from .models import *
+
+
 
 
 
@@ -27,13 +29,14 @@ class TrackViewSet(viewsets.ModelViewSet):
 
 #TABLAS DEL SISTEMA
 class UserViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
       
     
 class UserCreate(generics.CreateAPIView):
-    authentication_classes = ()
+    permission_classes = [permissions.DjangoModelPermissions]
     permission_classes = ()
     serializer_class = UserSerializer
 
@@ -55,50 +58,36 @@ class LoginView(APIView):
   
 
 class GroupViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
 
 #Tablas del NEGOCIOs
 class CategoriaViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
 
-    def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper | Isempresa]
-        return super(CategoriaViewSet, self).get_permissions()
-
     
 class MarcaViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = Marca.objects.all()
     serializer_class = MarcaSerializer
 
-    def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper|Isempresa]
-        return super(MarcaViewSet, self).get_permissions()
-
 class ProductoViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
-
-    def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper|Isempresa]
-        return super(ProductoViewSet, self).get_permissions()
 
 
 
 
 class PedidoViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = Pedido.objects.all()
     serializer_class = PedidoSerializer
 
-    def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-           self.permission_classes = [Isdeveloper | Isempresa]
-        return super(PedidoViewSet, self).get_permissions()
 
     @action(detail=False)
     def ultimopedido(self, request):
@@ -108,54 +97,35 @@ class PedidoViewSet(viewsets.ModelViewSet):
 
 
 class PedidodetalleViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = Pedidodetalle.objects.all()
     serializer_class = PedidodetalleSerializer
 
-    def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper | Isempresa]
-        return super(PedidodetalleViewSet, self).get_permissions()
-
 
 class EstadoViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = Estado.objects.all()
     serializer_class = EstadoSerializer
 
-    def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper | Isempresa]
-        return super(EstadoViewSet, self).get_permissions()
-
 
 class UnidadmedidaViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = Unidadmedida.objects.all()
     serializer_class = UnidadmedidaSerializer
-
-    def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper | Isempresa]
-        return super(UnidadmedidaViewSet, self).get_permissions()
 
 
 
 class ParametroViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = Parametro.objects.all()
     serializer_class = ParametroSerializer
 
-    def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper | Isempresa]
-        return super(ParametroViewSet, self).get_permissions()
-
 
 class PromoViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.DjangoModelPermissions]
     queryset = Promo.objects.all()
     serializer_class = PromoSerializer
 
-    def get_permissions(self):
-        if self.request.method == 'POST' or self.request.method == 'DELETE' or self.request.method == 'PUT':
-            self.permission_classes = [Isdeveloper | Isempresa]
-        return super(PromoViewSet, self).get_permissions()
 #Fin tabla de negocios
 
 
