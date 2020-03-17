@@ -1,19 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+
 # Create your models here.
 class Marca(models.Model):
     nombre      = models.CharField(max_length=50, blank=True)
     descripcion = models.CharField(max_length=200, blank=True, null=True)
 
 
-
-
 class Categoria(models.Model):
     nombre      = models.CharField(max_length=50, blank=True)
     descripcion = models.CharField(max_length=200,blank=True, null=True)
-
-
 
 
 class Unidadmedida(models.Model):
@@ -37,13 +35,9 @@ class Producto(models.Model):
     isfraccionado  = models.BooleanField(default=False, verbose_name='¿Es Fraccionado?')
 
 
-
 class Estado(models.Model):
     nombre      = models.CharField(max_length=50,  blank=False, null=False)
     descripcion = models.CharField(max_length=200, blank=True, null=True)
-
-
-
 
 
 class Pedido(models.Model):
@@ -68,16 +62,10 @@ class Pedido(models.Model):
     tiempodemora      = models.CharField(max_length=10, default='00:45', verbose_name='Tiempo Demora',  blank=True, null=True)
 
 
-
-
 class Pedidodetalle(models.Model):
     cantidad = models.DecimalField(default=0, decimal_places=3, max_digits=10)
     pedido   = models.ForeignKey(Pedido, on_delete=models.CASCADE,related_name='items')
     producto = models.ForeignKey(Producto,  on_delete=models.CASCADE)
-
-
-
-
 
 
 class Parametro(models.Model):
