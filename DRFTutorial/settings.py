@@ -26,6 +26,7 @@ SECRET_KEY = '-8ujr!6h%zo_k=*d@g9v6lfm1%7rv3l)3igcth!fg+a1r(ox^p'
 DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.0.8',
+		 '67.205.157.216',
                  '192.168.0.8:8000',
                  'localhost',
                  'ordermanager.com',
@@ -155,7 +156,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = '/home/repositorios/DRFTutorialCodeanywhere/site/public/static'
 SITE_ID = 1
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
