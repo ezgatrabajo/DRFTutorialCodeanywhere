@@ -29,9 +29,11 @@ ALLOWED_HOSTS = ['192.168.0.8',
                  '192.168.0.8:8000',
                  'localhost',
                  'ordermanager.com',
+                 'host1.ordermanager.com',
                  'ordermanager.com/*',
                  '127.0.0.1:8000',
-                 '127.0.0.1:8000']
+                 '127.0.0.1:8000',
+                 'testing.elementary.com']
 
 
 # Application definition
