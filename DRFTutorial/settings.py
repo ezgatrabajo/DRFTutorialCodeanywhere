@@ -26,13 +26,13 @@ SECRET_KEY = '-8ujr!6h%zo_k=*d@g9v6lfm1%7rv3l)3igcth!fg+a1r(ox^p'
 DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.0.8',
-		 '67.205.157.216',
+	        	 '67.205.157.216',
                  '192.168.0.8:8000',
                  'localhost',
                  'ordermanager.com',
                  'host1.ordermanager.com',
                  'ordermanager.com/*',
-                 '127.0.0.1:8000',
+                 '127.0.0.1',
                  '127.0.0.1:8000',
                  'testing.elementary.com']
 
@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['192.168.0.8',
 # Application definition
 
 INSTALLED_APPS = [
+    #'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,10 +54,12 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    'apirestful'
+    'apirestful',
+
 ]
 
 MIDDLEWARE = [
+    #'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -64,14 +67,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
+#CORS_ORIGIN_ALLOW_ALL = True
+#CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'DRFTutorial.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'reactweb/build'),
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -160,3 +169,7 @@ STATIC_ROOT = '/home/repositorios/DRFTutorialCodeanywhere/site/public/static'
 SITE_ID = 1
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
+
+STATICFILES_DIRS = [
+os.path.join(BASE_DIR, 'reactweb/build/static'),
+]
