@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated, SAFE_METHODS
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import action
-
+from rest_framework import status
 from django.contrib.auth import authenticate
 from rest_framework import generics
 from rest_framework import viewsets
@@ -32,9 +32,9 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    
-      
-    
+
+
+
 class UserCreate(generics.CreateAPIView):
     permission_classes = [permissions.DjangoModelPermissions]
     permission_classes = ()
@@ -43,19 +43,19 @@ class UserCreate(generics.CreateAPIView):
 
 class LoginView(APIView):
   permission_classes=()
-  
+
   def post(self, request):
     print("ingreso a login")
-    print("datos envidos:" + str(request.data))
+
     username = request.data.get("username")
     password = request.data.get("password")
     user = authenticate(username=username, password=password)
-    
+
     if user:
       return Response({"token":user.auth_token.key})
     else:
       return Response ({"error":"Wrong Credentials"}, status=400)
-  
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
@@ -69,7 +69,7 @@ class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
 
-    
+
 class MarcaViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.DjangoModelPermissions]
     queryset = Marca.objects.all()
@@ -91,9 +91,15 @@ class PedidoViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def ultimopedido(self, request):
-        p = Pedido.objects.all().order_by('-id')[0]
-        s = self.get_serializer(p,many=False)
-        return Response(s.data)
+        print("ultimo pedido", request.data['dni'])
+        if Pedido.objects.count() > 0:
+            p = Pedido.objects.all().order_by('-id')[0]
+            s = self.get_serializer(p, many=False)
+            response = Response(s.data)
+        else:
+            response = Response({"detail":"No existe pedidos"}, status=status.HTTP_400_BAD_REQUEST)
+        return response
+
 
 
 class PedidodetalleViewSet(viewsets.ModelViewSet):

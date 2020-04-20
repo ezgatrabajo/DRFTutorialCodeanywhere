@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'apirestful',
+    'drf_yasg',
 
 ]
 
@@ -101,12 +102,14 @@ WSGI_APPLICATION = 'DRFTutorial.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'apirestfuldjango',
-        'USER': 'elementarystudio',
-        'PASSWORD': 'YXFzd2RlZnI=',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ENGINE': 'django.db.backends.mysql',
+        #'NAME': 'apirestfuldjango',
+        #'USER': 'elementarystudio',
+        #'PASSWORD': 'YXFzd2RlZnI=',
+        #'HOST': 'localhost',
+        #'PORT': '',
     }
 }
 
